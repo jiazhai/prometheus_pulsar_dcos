@@ -1,3 +1,3 @@
-FROM prom/prometheus:v1.6.3
+FROM prom/prometheus:latest
 
 COPY  prometheus.yml /etc/prometheus/prometheus.yml
