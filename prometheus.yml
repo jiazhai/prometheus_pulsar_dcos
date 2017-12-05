@@ -8,12 +8,21 @@ scrape_configs:
       - servers: ['http://localhost:9090']
     relabel_configs:
       # disable all targets which do not have a METRICS_PATH on them
-      - source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
-        action: keep
-        regex: (.+)
+      #- source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
+      #  action: keep
+      #  regex: (.+)
 
       # assign the value of METRICS_PATH to the prometheus target's metrics path
-      - source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
-        action: replace
-        target_label: __metrics_path__
-        regex: (.+)
+      #- source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
+      #  action: replace
+      #  target_label: __metrics_path__
+      #  regex: (.+)a
+  
+    # collect for bookkeeper
+    - source_labels: ['__meta_marathon_app']
+      regex:         (.*bookkeeper.*)
+      action:        keep
+    # collect for broker 
+    - source_labels: ['__meta_marathon_app']
+      regex:         (.*broker.*)
+      action:        keep
