@@ -9,12 +9,12 @@ scrape_configs:
       - servers: ['http://marathon.mesos:8080']
     relabel_configs: 
       # disable all targets which do not have a METRICS_PATH on them
-      - source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
+      - source_labels: [__meta_marathon_port_definition_label_METRICS_PATH]
         action: keep
         regex: (.+)
 
       # assign the value of METRICS_PATH to the prometheus target's metrics path
-      - source_labels: [__meta_marathon_port_mapping_label_METRICS_PATH]
+      - source_labels: [__meta_marathon_port_definition_label_METRICS_PATH]
         action: replace
         target_label: __metrics_path__
         regex: (.+)
